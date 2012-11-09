@@ -1,4 +1,4 @@
-Koname Code Reader
+Konami Code Reader
 ==================
 
 Dojo QMágico 9/11/12
