@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<!--
+   left arrow	 37
+   up arrow	     38
+   right arrow	 39
+   down arrow	 40
+   a	         65
+   b	         66
+-->
+<script type="text/javascript" >
+    var konamiCode = function (sequence, fnc, paramTime) {
+        var timeExpected = 5000;
+        if (paramTime) timeExpected = paramTime;
+
+        var cursor = 0;
+        var timer;
+        var konamiReader=function(event){
+
+            if (event.keyCode === sequence[cursor]) {
+                cursor++;
+                if (cursor === 1)
+                    timer = setTimeout(function(){
+                        cursor = 0;
+                        clearTimeout(timer);
+                    }, timeExpected);
+            }
+            else
+                cursor = 0;
+            if (cursor === sequence.length)
+                fnc();
+        }
+        document.addEventListener("keydown",konamiReader);
+    }
+
+    konamiCode([38,38,40], function(){console.log("xupa")});
+    konamiCode([38,38,40,40,37,39,37,39,66,65], function(){
+        document.body.odin = !document.body.odin
+        if (document.body.odin)
+            document.body.style.backgroundImage = 'url(http://www.girlsofwar.com.br/wp-content/uploads/2012/09/sf2gameplay.jpg)';
+        else
+            document.body.style.backgroundImage = "none";
+    });
+</script>
+</body>
+</html>
